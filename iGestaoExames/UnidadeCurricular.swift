@@ -27,6 +27,10 @@ class UnidadeCurricular : Comparable {
         self.dExameEspecial = dExameEspecial
     }
     
+    var strAnoSem : String {
+        return "\(ano)º A / \(semestre)º S"
+    }
+    
     var descricao : String {
         return "UC: \(nome) - \(ano)º ano \(semestre)º semestre \nExame Normal: \(dExameNormal) Exame Recurso: \(dExameRecurso) Exame Especial: \(dExameEspecial)"
     }
@@ -37,5 +41,15 @@ class UnidadeCurricular : Comparable {
     
     static func == (lhs: UnidadeCurricular, rhs: UnidadeCurricular) -> Bool {
         return (lhs.ano + lhs.semestre) == (rhs.ano + rhs.semestre)
+    }
+    
+}
+
+extension Date {
+    func string() -> String {
+        let format = "dd-MM-yyyy"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        return dateFormatter.string(from: self)
     }
 }

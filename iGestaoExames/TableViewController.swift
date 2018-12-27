@@ -8,7 +8,11 @@
 
 import UIKit
 
-class TableViewController: UITableViewController {
+protocol RefreshTableView {
+    func refresh()
+}
+
+class TableViewController: UITableViewController, RefreshTableView {
     
     // debug - observable que imprime no log
     var lstUCs : [UnidadeCurricular] = [] {
@@ -20,15 +24,28 @@ class TableViewController: UITableViewController {
             }
         }
     }
+    
+    func registerTableViewCells(){
+        
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        lstUCs.append(UnidadeCurricular(nome: "AMov", ano: 3, semestre: 1, dExameNormal: Date(), dExameRecurso: Date(), dExameEspecial: Date()))
+        lstUCs.append(UnidadeCurricular(nome: "PWeb", ano: 3, semestre: 1, dExameNormal: Date(), dExameRecurso: Date(), dExameEspecial: Date()))
+        lstUCs.append(UnidadeCurricular(nome: "SO", ano: 2, semestre: 1, dExameNormal: Date(), dExameRecurso: Date(), dExameEspecial: Date()))
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        refresh()
+    }
+    
+    func refresh() {
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source
@@ -44,15 +61,21 @@ class TableViewController: UITableViewController {
         return lstUCs.count
     }
 
-    /*
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "itemUC", for: indexPath) as! TableViewCell
 
-        // Configure the cell...
+        let row = indexPath.row
+        
+        cell.nomeUC?.text = lstUCs[row].nome
+        cell.anoSemUC?.text = lstUCs[row].strAnoSem
+        cell.dExameNormal?.text = lstUCs[row].dExameNormal.string()
+        cell.dExameRecurso?.text = lstUCs[row].dExameRecurso.string()
+        cell.dExamespecial?.text = lstUCs[row].dExameEspecial.string()
 
         return cell
     }
-    */
+ 
 
     /*
     // Override to support conditional editing of the table view.

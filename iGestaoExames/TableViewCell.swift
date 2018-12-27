@@ -13,6 +13,7 @@ class TableViewCell: UITableViewCell {
     // MARK: Propriedades
     
     @IBOutlet weak var nomeUC: UILabel!
+    @IBOutlet weak var anoSemUC: UILabel!
     @IBOutlet weak var dExameNormal: UILabel!
     @IBOutlet weak var dExameRecurso: UILabel!
     @IBOutlet weak var dExamespecial: UILabel!
@@ -29,4 +30,5 @@ class TableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    
 }
