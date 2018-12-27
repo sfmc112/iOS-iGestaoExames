@@ -18,6 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="1" green="0.95863038301467896" blue="0.84140521287918091" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="sectionIndexBackgroundColor" red="1" green="0.95703813360000001" blue="0.84244390609999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="itemUC" rowHeight="70" id="0m8-G5-Gut" customClass="TableViewCell" customModule="iGestaoExames" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="320" height="70"/>
@@ -27,7 +28,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="HDm-NS-Cj7">
-                                            <rect key="frame" x="144.5" y="1" width="77" height="67.5"/>
+                                            <rect key="frame" x="184.5" y="1" width="77" height="67.5"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ép. Normal:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SHD-HH-bB9">
                                                     <rect key="frame" x="0.0" y="0.0" width="77" height="21"/>
@@ -73,7 +74,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="ZwZ-GW-pDA">
-                                            <rect key="frame" x="16" y="11" width="120.5" height="48"/>
+                                            <rect key="frame" x="16" y="11" width="160.5" height="48"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nome" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oNq-hF-zKD">
                                                     <rect key="frame" x="0.0" y="0.0" width="38.5" height="20"/>
@@ -92,7 +93,7 @@
                                     </subviews>
                                     <constraints>
                                         <constraint firstAttribute="bottomMargin" secondItem="ZwZ-GW-pDA" secondAttribute="bottom" id="2le-G1-7vb"/>
-                                        <constraint firstItem="VVK-rT-lkD" firstAttribute="leading" secondItem="HDm-NS-Cj7" secondAttribute="trailing" constant="50" id="67j-uP-H58"/>
+                                        <constraint firstItem="VVK-rT-lkD" firstAttribute="leading" secondItem="HDm-NS-Cj7" secondAttribute="trailing" constant="10" id="67j-uP-H58"/>
                                         <constraint firstItem="ZwZ-GW-pDA" firstAttribute="leading" secondItem="eBO-GP-UKh" secondAttribute="leadingMargin" id="8Vd-Jh-h2U"/>
                                         <constraint firstItem="HDm-NS-Cj7" firstAttribute="leading" secondItem="ZwZ-GW-pDA" secondAttribute="trailing" constant="8" id="BdY-bM-lBi"/>
                                         <constraint firstAttribute="bottom" secondItem="VVK-rT-lkD" secondAttribute="bottom" constant="1" id="DXF-70-jxd"/>
@@ -103,7 +104,7 @@
                                         <constraint firstAttribute="trailing" secondItem="VVK-rT-lkD" secondAttribute="trailing" constant="20" id="jtV-pM-Jso"/>
                                     </constraints>
                                 </tableViewCellContentView>
-                                <color key="backgroundColor" red="0.65477250647668395" green="0.51281216500882398" blue="0.33740584720380695" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="1" green="0.95703813360000001" blue="0.84244390609999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <connections>
                                     <outlet property="anoSemUC" destination="xc7-1S-D1g" id="C0R-QP-WGc"/>
                                     <outlet property="dExameNormal" destination="smw-GZ-C34" id="8V7-2N-njE"/>
@@ -121,7 +122,7 @@
                     <navigationItem key="navigationItem" title="iGestãoExames" id="5Xd-cD-BYq">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="T97-mt-CvM">
                             <connections>
-                                <segue destination="eed-4b-0EU" kind="show" id="ZJ7-Xy-y22"/>
+                                <segue destination="eed-4b-0EU" kind="show" identifier="addUC" id="ZJ7-Xy-y22"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -253,10 +254,17 @@
                         <viewLayoutGuide key="safeArea" id="CHv-wd-MAF"/>
                     </view>
                     <navigationItem key="navigationItem" title="Nova UC" id="nGq-Vy-dzR">
-                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Yrk-u7-3xn"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="save" id="Yrk-u7-3xn">
+                            <connections>
+                                <action selector="onSave:" destination="eed-4b-0EU" id="a6E-ae-9x9"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="pickerAnoSem" destination="ttW-ZA-y9M" id="QhN-HF-gYM"/>
+                        <outlet property="pickerExameE" destination="T6L-1W-Kwi" id="OjH-wR-0eZ"/>
+                        <outlet property="pickerExameN" destination="dAm-eA-P8W" id="Dxi-sf-HFe"/>
+                        <outlet property="pickerExameR" destination="CoY-qc-QgV" id="vvc-2J-qXP"/>
                         <outlet property="tfNome" destination="5Sz-JC-p6r" id="O7b-0Q-aYB"/>
                     </connections>
                 </viewController>
