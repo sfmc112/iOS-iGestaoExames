@@ -10,6 +10,11 @@
 import Foundation
 import CoreData
 
+protocol OrdenarDisciplinas {
+    func ordenaPorNome()
+    func ordenaPorPlanoCurricular()
+    func ordenaPorDataDoExame()
+}
 
 public class Disciplina: NSManagedObject {
 

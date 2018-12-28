@@ -29,7 +29,7 @@ extension Disciplina {
 
     class func instanciaDisciplina(nome: String) -> Disciplina? {
         let request = Disciplina.getDisciplinaRequest()
-        let predicate = NSPredicate(format: "nome = $@", nome)
+        let predicate = NSPredicate(format: "nome = %@", nome)
         request.predicate = predicate
         
         do {

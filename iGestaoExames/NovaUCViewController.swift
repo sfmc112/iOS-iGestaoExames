@@ -38,6 +38,7 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         var canEdit = true
         
         if let uc = ucSelecionada {
+            // TODO alertcontroller Sim/Não para perguntar se quer editar o nome
             canEdit = false
             tfNome.text = uc.nome
             pickerAnoSem.selectRow(Int(uc.ano) - 1, inComponent: 0, animated: false)

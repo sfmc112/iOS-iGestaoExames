@@ -35,4 +35,23 @@ public class DatabaseManager {
             print(error.localizedDescription)
         }
     }
+    
+    static func eliminaTodasDisciplinas() {
+        let request = Disciplina.getDisciplinaRequest()
+        
+        do {
+            let disciplinas = try contexto.fetch(request)
+            disciplinas.forEach({ d in
+                d.eliminaDisciplina()
+            })
+            app.saveContext()
+        } catch let error {
+            print(error.localizedDescription)
+        }
+    }
+    
+    static func eliminaDisciplina(nome : String) {
+        let disciplina = Disciplina.instanciaDisciplina(nome: nome)
+        disciplina?.eliminaDisciplina()
+    }
 }
