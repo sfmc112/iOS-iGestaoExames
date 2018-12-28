@@ -12,6 +12,9 @@
 		D83ABC4021CA530600E6B3C2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D83ABC3F21CA530600E6B3C2 /* Assets.xcassets */; };
 		D83ABC4321CA530600E6B3C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D83ABC4121CA530600E6B3C2 /* LaunchScreen.storyboard */; };
 		D83ABC4D21CA547800E6B3C2 /* UnidadeCurricular.swift in Sources */ = {isa = PBXBuildFile; fileRef = D83ABC4C21CA547800E6B3C2 /* UnidadeCurricular.swift */; };
+		D871FDD021D66FA10094FC4D /* Disciplina+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = D871FDCE21D66FA10094FC4D /* Disciplina+CoreDataClass.swift */; };
+		D871FDD121D66FA10094FC4D /* Disciplina+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = D871FDCF21D66FA10094FC4D /* Disciplina+CoreDataProperties.swift */; };
+		D871FDD321D67D6A0094FC4D /* DataBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D871FDD221D67D6A0094FC4D /* DataBaseManager.swift */; };
 		D8C434AA21CAAD4600E85517 /* NovaUCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8C434A921CAAD4600E85517 /* NovaUCViewController.swift */; };
 		D8EEA44821D6424200AC0D13 /* UCModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = D8EEA44621D6424200AC0D13 /* UCModel.xcdatamodeld */; };
 		D8EF7EBA21CA5EF90091E515 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D8EF7EB921CA5EF90091E515 /* TableViewController.swift */; };
@@ -26,6 +29,9 @@
 		D83ABC4221CA530600E6B3C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D83ABC4421CA530600E6B3C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D83ABC4C21CA547800E6B3C2 /* UnidadeCurricular.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnidadeCurricular.swift; sourceTree = "<group>"; };
+		D871FDCE21D66FA10094FC4D /* Disciplina+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Disciplina+CoreDataClass.swift"; sourceTree = "<group>"; };
+		D871FDCF21D66FA10094FC4D /* Disciplina+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Disciplina+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		D871FDD221D67D6A0094FC4D /* DataBaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseManager.swift; sourceTree = "<group>"; };
 		D8C434A921CAAD4600E85517 /* NovaUCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NovaUCViewController.swift; sourceTree = "<group>"; };
 		D8EEA44721D6424200AC0D13 /* UCModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = UCModel.xcdatamodel; sourceTree = "<group>"; };
 		D8EF7EB921CA5EF90091E515 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
@@ -62,11 +68,14 @@
 		D83ABC3721CA530400E6B3C2 /* iGestaoExames */ = {
 			isa = PBXGroup;
 			children = (
+				D871FDCE21D66FA10094FC4D /* Disciplina+CoreDataClass.swift */,
+				D871FDCF21D66FA10094FC4D /* Disciplina+CoreDataProperties.swift */,
 				D83ABC3821CA530400E6B3C2 /* AppDelegate.swift */,
 				D8EEA44621D6424200AC0D13 /* UCModel.xcdatamodeld */,
 				D83ABC3C21CA530400E6B3C2 /* Main.storyboard */,
-				D8EF7EBB21CA6AAD0091E515 /* TableViewCell.swift */,
 				D8EF7EB921CA5EF90091E515 /* TableViewController.swift */,
+				D8EF7EBB21CA6AAD0091E515 /* TableViewCell.swift */,
+				D871FDD221D67D6A0094FC4D /* DataBaseManager.swift */,
 				D8C434A921CAAD4600E85517 /* NovaUCViewController.swift */,
 				D83ABC4C21CA547800E6B3C2 /* UnidadeCurricular.swift */,
 				D83ABC3F21CA530600E6B3C2 /* Assets.xcassets */,
@@ -148,11 +157,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				D8C434AA21CAAD4600E85517 /* NovaUCViewController.swift in Sources */,
+				D871FDD321D67D6A0094FC4D /* DataBaseManager.swift in Sources */,
+				D871FDD121D66FA10094FC4D /* Disciplina+CoreDataProperties.swift in Sources */,
 				D83ABC3921CA530400E6B3C2 /* AppDelegate.swift in Sources */,
 				D8EF7EBC21CA6AAD0091E515 /* TableViewCell.swift in Sources */,
 				D8EEA44821D6424200AC0D13 /* UCModel.xcdatamodeld in Sources */,
 				D8EF7EBA21CA5EF90091E515 /* TableViewController.swift in Sources */,
 				D83ABC4D21CA547800E6B3C2 /* UnidadeCurricular.swift in Sources */,
+				D871FDD021D66FA10094FC4D /* Disciplina+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -12,6 +12,7 @@ protocol RefreshTableView {
     func refresh()
 }
 
+
 class TableViewController: UITableViewController, RefreshTableView {
     
     let app = UIApplication.shared.delegate as! AppDelegate
@@ -30,6 +31,8 @@ class TableViewController: UITableViewController, RefreshTableView {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        DatabaseManager.atualizaListaDisciplinas()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -39,6 +42,7 @@ class TableViewController: UITableViewController, RefreshTableView {
     func refresh() {
         tableView.reloadData()
     }
+    
 
     // MARK: - Table view data source
 
@@ -58,9 +62,9 @@ class TableViewController: UITableViewController, RefreshTableView {
         
         cell.nomeUC?.text = uc.nome
         cell.anoSemUC?.text = "\(uc.ano)º A / \(uc.semestre)º S"
-        cell.dExameNormal?.text = uc.dExameNormal?.string()
-        cell.dExameRecurso?.text = uc.dExameRecurso?.string()
-        cell.dExamespecial?.text = uc.dExameEspecial?.string()
+        cell.dExameNormal?.text = uc.dExameNormal.string()
+        cell.dExameRecurso?.text = uc.dExameRecurso.string()
+        cell.dExamespecial?.text = uc.dExameEspecial.string()
 
         return cell
     }

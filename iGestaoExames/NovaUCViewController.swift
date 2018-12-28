@@ -35,15 +35,20 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         
         // Do any additional setup after loading the view.
         
+        var canEdit = true
+        
         if let uc = ucSelecionada {
+            canEdit = false
             tfNome.text = uc.nome
             pickerAnoSem.selectRow(Int(uc.ano) - 1, inComponent: 0, animated: false)
             pickerAnoSem.selectRow(Int(uc.semestre) - 1, inComponent: 1, animated: false)
-            pickerExameN.setDate(uc.dExameNormal!, animated: false)
-            pickerExameR.setDate(uc.dExameRecurso!, animated: false)
-            pickerExameE.setDate(uc.dExameEspecial!, animated: false)
+            pickerExameN.setDate(uc.dExameNormal, animated: false)
+            pickerExameR.setDate(uc.dExameRecurso, animated: false)
+            pickerExameE.setDate(uc.dExameEspecial, animated: false)
         }
         
+        tfNome.isUserInteractionEnabled = canEdit
+        pickerAnoSem.isUserInteractionEnabled = canEdit
         tfNome.becomeFirstResponder()
     }
     
@@ -102,40 +107,17 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let dataERecurso = pickerExameR.date
         let dataEEspecial = pickerExameE.date
         
-        let app = UIApplication.shared.delegate as! AppDelegate
-        let context = app.persistentContainer.viewContext
-        
         if let uc = ucSelecionada {
             // Editar UC
-            
-            uc.nome = nome
-            uc.ano = Int16(ano)
-            uc.semestre = Int16(semestre)
-            uc.dExameNormal = dataENormal
-            uc.dExameRecurso = dataERecurso
-            uc.dExameEspecial = dataEEspecial
-            
+            uc.editaDisciplina(nome: nome, ano: ano, semestre: semestre, exameNormal: dataENormal, exameRecurso: dataERecurso, exameEspecial: dataEEspecial)
         }else{
             // Criar UC
-            //let uc = UnidadeCurricular(nome: nome, ano: ano, semestre: semestre, dExameNormal: dataENormal, dExameRecurso: dataERecurso, dExameEspecial: dataEEspecial)
-            
-            let uc = Disciplina(context: context)
-            uc.nome = nome
-            uc.ano = Int16(ano)
-            uc.semestre = Int16(semestre)
-            uc.dExameNormal = dataENormal
-            uc.dExameRecurso = dataERecurso
-            uc.dExameEspecial = dataEEspecial
-            
-            //app.lstUCs.append(uc)
+            DatabaseManager.criarDisciplina(nome: nome, ano: ano, semestre: semestre, exameNormal: dataENormal, exameRecurso: dataERecurso, exameEspecial: dataEEspecial)
         }
-        
-        app.saveContext()
         
         delegate?.refresh()
         
         navigationController?.popViewController(animated: true)
-        
     }
     
 }
