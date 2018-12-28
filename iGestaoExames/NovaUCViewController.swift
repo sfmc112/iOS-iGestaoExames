@@ -53,6 +53,10 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         tfNome.becomeFirstResponder()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(true, animated: animated)
+    }
     
     /*
      // MARK: - Navigation
