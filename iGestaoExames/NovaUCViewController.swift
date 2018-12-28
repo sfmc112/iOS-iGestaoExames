@@ -7,19 +7,19 @@
 //
 
 import UIKit
+import CoreData
 
 class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
     
-
+    
     @IBOutlet weak var tfNome: UITextField!
     @IBOutlet weak var pickerAnoSem: UIPickerView!
     @IBOutlet weak var pickerExameN: UIDatePicker!
     @IBOutlet weak var pickerExameR: UIDatePicker!
     @IBOutlet weak var pickerExameE: UIDatePicker!
     
-    var tableView : TableViewController?
     var delegate : RefreshTableView?
-    var ucSelecionada : UnidadeCurricular?
+    var ucSelecionada : Disciplina?
     
     var pickerASData: [[String]] = [[String]] ()
     
@@ -33,35 +33,37 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         // Dados
         pickerASData = [["1º", "2º", "3º"], ["1º", "2º"]]
         
-        tableView =
-        
         // Do any additional setup after loading the view.
+        
+        if let uc = ucSelecionada {
+            tfNome.text = uc.nome
+            pickerAnoSem.selectRow(Int(uc.ano) - 1, inComponent: 0, animated: false)
+            pickerAnoSem.selectRow(Int(uc.semestre) - 1, inComponent: 1, animated: false)
+            pickerExameN.setDate(uc.dExameNormal!, animated: false)
+            pickerExameR.setDate(uc.dExameRecurso!, animated: false)
+            pickerExameE.setDate(uc.dExameEspecial!, animated: false)
+        }
+        
+        tfNome.becomeFirstResponder()
     }
     
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
     // Picker Ano / Semestre
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 2
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        if component == 0 {
-//            return pickerASData[0].count
-//        }
-//
-//        else {
-//            return pickerASData[1].count
-//        }
         return pickerASData[component].count
     }
     
@@ -77,15 +79,15 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         var semestreString = ""
         
         if component == 0 {
-           anoString = pickerASData[component][row]
+            anoString = pickerASData[component][row]
             ano = Int(String(anoString.prefix(1)))!
         } else {
             semestreString = pickerASData[component][row]
             semestre = Int(String(semestreString.prefix(1)))!
         }
         
-        print("\(ano)º ano")
-        print("\(semestre)º semestre")
+        // print("\(ano)º ano")
+        // print("\(semestre)º semestre")
     }
     
     @IBAction func onSave(_ sender: Any) {
@@ -96,24 +98,44 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             return
         }
         
+        let dataENormal = pickerExameN.date
+        let dataERecurso = pickerExameR.date
+        let dataEEspecial = pickerExameE.date
+        
+        let app = UIApplication.shared.delegate as! AppDelegate
+        let context = app.persistentContainer.viewContext
+        
         if let uc = ucSelecionada {
             // Editar UC
+            
             uc.nome = nome
-            // TODO finish this
+            uc.ano = Int16(ano)
+            uc.semestre = Int16(semestre)
+            uc.dExameNormal = dataENormal
+            uc.dExameRecurso = dataERecurso
+            uc.dExameEspecial = dataEEspecial
+            
         }else{
             // Criar UC
-            let dataENormal = pickerExameN.date
-            let dataERecurso = pickerExameR.date
-            let dataEEspecial = pickerExameE.date
+            //let uc = UnidadeCurricular(nome: nome, ano: ano, semestre: semestre, dExameNormal: dataENormal, dExameRecurso: dataERecurso, dExameEspecial: dataEEspecial)
             
-            let uc = UnidadeCurricular(nome: nome, ano: ano, semestre: semestre, dExameNormal: dataENormal, dExameRecurso: dataERecurso, dExameEspecial: dataEEspecial)
+            let uc = Disciplina(context: context)
+            uc.nome = nome
+            uc.ano = Int16(ano)
+            uc.semestre = Int16(semestre)
+            uc.dExameNormal = dataENormal
+            uc.dExameRecurso = dataERecurso
+            uc.dExameEspecial = dataEEspecial
             
-            
-                
-                delegate?.refresh()
-            
-            navigationController?.popViewController(animated: true)
-            
+            //app.lstUCs.append(uc)
         }
+        
+        app.saveContext()
+        
+        delegate?.refresh()
+        
+        navigationController?.popViewController(animated: true)
+        
     }
+    
 }
