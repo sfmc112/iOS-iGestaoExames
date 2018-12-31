@@ -119,13 +119,28 @@
                             <outlet property="delegate" destination="5dp-rt-FKA" id="MAB-78-0fr"/>
                         </connections>
                     </tableView>
+                    <toolbarItems>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="UTJ-wU-gG9"/>
+                        <barButtonItem systemItem="trash" id="he3-qU-MLj">
+                            <connections>
+                                <action selector="onTrash:" destination="5dp-rt-FKA" id="a2Y-74-WxG"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem style="plain" systemItem="flexibleSpace" id="Sbd-3F-A4J"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" title="iGestãoExames" id="5Xd-cD-BYq">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="xz9-km-kjT">
+                            <connections>
+                                <action selector="onTrash:" destination="5dp-rt-FKA" id="vge-kg-juh"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="T97-mt-CvM">
                             <connections>
                                 <segue destination="eed-4b-0EU" kind="show" identifier="addUC" id="ZJ7-Xy-y22"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ubc-gW-zIU" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

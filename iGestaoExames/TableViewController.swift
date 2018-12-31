@@ -16,7 +16,13 @@ protocol RefreshTableView {
 class TableViewController: UITableViewController, RefreshTableView {
     
     let app = UIApplication.shared.delegate as! AppDelegate
-
+    
+    @IBAction func onTrash(_ sender: Any) {
+        // Este código apresenta uma janela de alerta mas como por alguma razão não atualiza a table view, está em comentário
+        // confirmaApagarTudo()
+        eliminaTudo()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Uncomment the following line to preserve selection between presentations
@@ -24,19 +30,22 @@ class TableViewController: UITableViewController, RefreshTableView {
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         self.navigationItem.leftBarButtonItem = self.editButtonItem
-        
-        var items = [UIBarButtonItem]()
-        
-        items.append(UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(confirmaApagarTudo)))
-        
+//
+//        var items = [UIBarButtonItem]()
+////
+//        items.append(UIBarButtonItem(barButtonSystemItem: .trash, target: self, action:nil))
+////
         self.navigationController?.setToolbarHidden(false, animated: false)
-        self.navigationController?.toolbarItems = items
+//        self.navigationController?.toolbarItems = items
         
         DatabaseManager.atualizaListaDisciplinas()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.setToolbarHidden(false, animated: false)
+        DatabaseManager.atualizaListaDisciplinas()
+        refresh()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -135,16 +144,24 @@ class TableViewController: UITableViewController, RefreshTableView {
         
     }
     
-    @objc func confirmaApagarTudo() {
+    
+    func confirmaApagarTudo() {
         let alertController = UIAlertController(title: "Eliminar tudo", message: "Tem a certeza que pretende eliminar todas as disciplinas?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Não Apagar", style: .cancel, handler: nil)
         alertController.addAction(cancelAction)
         
-        let okAction = UIAlertAction(title: "Apagar", style: .default, handler: {(action) -> Void in
-            DatabaseManager.eliminaTodasDisciplinas()
+        let okAction = UIAlertAction(title: "Apagar", style: .default, handler: {_ -> Void in
+             self.eliminaTudo()
         })
         alertController.addAction(okAction)
-        
         present(alertController, animated: true, completion: nil)
+    }
+    
+    func eliminaTudo(){
+        DatabaseManager.eliminaTodasDisciplinas()
+        DatabaseManager.atualizaListaDisciplinas()
+        print("Lista depois de eliminar tudo: ")
+        self.app.lstUCs.forEach({print($0.description)})
+        refresh()
     }
 }
