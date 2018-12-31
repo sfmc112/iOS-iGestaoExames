@@ -38,7 +38,7 @@ class TableViewController: UITableViewController, RefreshTableView {
         self.navigationController?.setToolbarHidden(false, animated: false)
 //        self.navigationController?.toolbarItems = items
         
-        DatabaseManager.atualizaListaDisciplinas()
+        DatabaseManager.ordenaPorNome()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -163,5 +163,27 @@ class TableViewController: UITableViewController, RefreshTableView {
         print("Lista depois de eliminar tudo: ")
         self.app.lstUCs.forEach({print($0.description)})
         refresh()
+    }
+    
+    
+    @IBOutlet weak var escolheOrdem: UISegmentedControl!
+    
+    @IBAction func onChangeOrdem(_ sender: Any) {
+        let option = escolheOrdem.selectedSegmentIndex
+        
+        switch option {
+        case 0:
+            print("A ordenar por Nome")
+            DatabaseManager.ordenaPorNome()
+        case 1:
+            print("A ordenar por Ano/Semestre")
+            DatabaseManager.ordenaPorPlanoCurricular()
+        case 2:
+            print("A ordenar por Data mais próxima")
+            DatabaseManager.ordenaPorDataDoExame()
+        default:
+            print("Erro?")
+        }
+        self.refresh()
     }
 }
