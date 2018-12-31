@@ -104,6 +104,7 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let nome = tfNome.text!
         
         if nome.count < 1 {
+            mostraAlertaInvalido(msg: "O nome introduzido é inválido")
             tfNome.becomeFirstResponder()
             return
         }
@@ -111,6 +112,11 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         let dataENormal = pickerExameN.date
         let dataERecurso = pickerExameR.date
         let dataEEspecial = pickerExameE.date
+        
+        if dataENormal > dataERecurso || dataENormal > dataEEspecial || dataERecurso > dataEEspecial {
+            mostraAlertaInvalido(msg: "Uma das datas é inválida, tente novamente.")
+            return
+        }
         
         if let uc = ucSelecionada {
             // Editar UC
@@ -125,4 +131,11 @@ class NovaUCViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         navigationController?.popViewController(animated: true)
     }
     
+    func mostraAlertaInvalido(msg : String) {
+        let alertController = UIAlertController(title: "Erro", message: msg, preferredStyle: .alert)
+        
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil)
+        alertController.addAction(okAction)
+        present(alertController, animated: true, completion: nil)
+    }
 }

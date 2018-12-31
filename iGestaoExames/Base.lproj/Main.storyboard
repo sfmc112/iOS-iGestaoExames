@@ -155,11 +155,7 @@
                         <barButtonItem style="plain" systemItem="flexibleSpace" id="Sbd-3F-A4J"/>
                     </toolbarItems>
                     <navigationItem key="navigationItem" title="iGestãoExames" id="5Xd-cD-BYq">
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="xz9-km-kjT">
-                            <connections>
-                                <action selector="onTrash:" destination="5dp-rt-FKA" id="vge-kg-juh"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="Back" id="t0X-3V-uye"/>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="T97-mt-CvM">
                             <connections>
                                 <segue destination="eed-4b-0EU" kind="show" identifier="addUC" id="ZJ7-Xy-y22"/>

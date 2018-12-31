@@ -38,13 +38,14 @@ class TableViewController: UITableViewController, RefreshTableView {
         self.navigationController?.setToolbarHidden(false, animated: false)
 //        self.navigationController?.toolbarItems = items
         
-        DatabaseManager.ordenaPorNome()
+        // atualizaOrdem()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setToolbarHidden(false, animated: false)
         DatabaseManager.atualizaListaDisciplinas()
+        atualizaOrdem()
         refresh()
     }
     
@@ -144,7 +145,6 @@ class TableViewController: UITableViewController, RefreshTableView {
         
     }
     
-    
     func confirmaApagarTudo() {
         let alertController = UIAlertController(title: "Eliminar tudo", message: "Tem a certeza que pretende eliminar todas as disciplinas?", preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Não Apagar", style: .cancel, handler: nil)
@@ -169,6 +169,10 @@ class TableViewController: UITableViewController, RefreshTableView {
     @IBOutlet weak var escolheOrdem: UISegmentedControl!
     
     @IBAction func onChangeOrdem(_ sender: Any) {
+        atualizaOrdem()
+    }
+    
+    func atualizaOrdem() {
         let option = escolheOrdem.selectedSegmentIndex
         
         switch option {
